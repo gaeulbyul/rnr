@@ -1,3 +1,5 @@
+extern crate wild;
+
 use app::create_app;
 use atty;
 use output::Printer;
@@ -44,7 +46,7 @@ pub enum RunMode {
 /// Parse arguments and do some checking.
 fn parse_arguments() -> Result<Config, String> {
     let app = create_app();
-    let matches = app.get_matches();
+    let matches = app.get_matches_from(wild::args());
 
     // Set output mode
     let printer = if matches.is_present("silent") {
